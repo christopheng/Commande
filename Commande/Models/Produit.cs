@@ -1,10 +1,16 @@
-﻿namespace Commande
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Commande
 {
     public class Produit
     {
-        public int ProduitID { get; set; }
+        public int ProduitId { get; set; }
         public string Name { get; set; }
         public decimal Prix { get; set; }
         public string Commentaire { get; set; }
+
+        public int? OrderId { get; set; }
+        [ForeignKey("OrderId")]
+        public Order Order { get; set; }
     }
 }

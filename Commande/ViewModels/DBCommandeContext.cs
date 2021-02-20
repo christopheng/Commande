@@ -25,6 +25,45 @@ namespace Commande
         public virtual DbSet<Client> Clients { get; set; }
         #endregion
 
+        #region Get All Elements
+        public static List<Order> GetAllOrders()
+        {
+            var o = new List<Order>();
+            using (var myDB=new DBCommandeContext())
+            {
+                var products = myDB.Produits.ToList();
+
+                var clients = myDB.Clients.ToList();
+
+                o = myDB.Orders.ToList();
+            }
+            return o;
+        }
+
+        public static List<Client> GetAllClients()
+        {
+            var c = new List<Client>();
+            using(var myDB=new DBCommandeContext())
+            {
+                var products = myDB.Produits.ToList();
+                var orders = myDB.Orders.ToList();
+                c = myDB.Clients.ToList();
+            }
+            return c;
+        }
+
+        public static List<Produit> GetAllProduits()
+        {
+            var p = new List<Produit>();
+            using (var myDB = new DBCommandeContext())
+            {
+                var clients = myDB.Clients.ToList();
+                var orders = myDB.Orders.ToList();
+                p = myDB.Produits.ToList();
+            }
+            return p;
+        }
+        #endregion
 
     }
 }
