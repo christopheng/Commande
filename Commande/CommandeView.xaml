@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Commande.Views"
-        mc:Ignorable="d"
+        mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Commandes" Height="600" Width="1000">
     <Grid>
         <TabControl x:Name="BoutiqueTabControl" TabStripPlacement="Left">
@@ -45,7 +45,7 @@
                         
 
                             <DataGrid x:Name="viewCommandesDataGrid" IsReadOnly="True" Grid.Row="1"
-                                      ItemsSource="{Binding Orders, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding Orders, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" RowHeight="100"
                                       SelectedItem="{Binding SelectedOrder, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                                       AutoGenerateColumns="False" GridLinesVisibility="All" Width="auto">
                                 <DataGrid.Columns>
@@ -56,6 +56,7 @@
                                     <DataGridTextColumn Width="auto" Header="Etat" Binding="{Binding Recupere}"/>
                                     <DataGridTextColumn Width="*" Header="Détail" Binding="{Binding Produits}"/>
                                 </DataGrid.Columns>
+                                
                             </DataGrid>
 
                             <Grid Grid.Row="2">

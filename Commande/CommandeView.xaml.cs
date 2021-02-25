@@ -31,7 +31,11 @@ namespace Commande.Views
             set
             {
                 _orders = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Orders"));
+                if (_orders != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Orders"));
+                }
+                
             }
         }
 
@@ -93,24 +97,19 @@ namespace Commande.Views
         public CommandeView()
         {
             InitializeComponent();
-        }
-
-        private void PropertyChanged(CommandeView commandeView, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            throw new NotImplementedException();
-        }
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add
+            using (var myDB = new DBCommandeContext())
             {
-                throw new NotImplementedException();
+                //myDB.Clients.Add(new Client { Nom = "Christophe", Telephone = "12345" });
+                List<Produit> prods = new List<Produit>();
+                prods.Add(new Produit { Name = "Buche", });
+                myDB.Orders.Add(new Order { Boutique = 1, Client = new Client { Nom = "Ch", Telephone = "12344" }, Date = DateTime.Now, Recupere = 1 , Produits=prods});
+                myDB.SaveChanges();
+                Orders = new ObservableCollection<Order>(myDB.Orders.ToList());
             }
+            
 
-            remove
-            {
-                throw new NotImplementedException();
-            }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
